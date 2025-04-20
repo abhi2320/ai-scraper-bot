@@ -1,0 +1,28 @@
+services:
+  app:
+    build: .
+    container_name: ai_scraper
+    env_file:
+      - .env
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    command: python main.py
+
+  db:
+    image: ankane/pgvector
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: scraper_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

@@ -1,0 +1,152 @@
+2025-04-19 11:26:46,290 - storage.db_handler - ERROR - Error initializing database: type object 'Base' has no attribute 'page_metadata'
+2025-04-19 11:28:33,591 - storage.db_handler - ERROR - Error initializing database: type object 'Base' has no attribute 'page_metadata'
+2025-04-19 11:30:27,337 - storage.db_handler - ERROR - Error initializing database: (psycopg2.OperationalError) could not translate host name "db" to address: No such host is known. 
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-04-19 17:26:35,652 - storage.db_handler - ERROR - Error initializing database: (psycopg2.errors.UndefinedObject) type "vector" does not exist
+LINE 8:  embedding VECTOR(1536), 
+                   ^
+
+[SQL: 
+CREATE TABLE scraped_pages (
+	id SERIAL NOT NULL, 
+	url VARCHAR NOT NULL, 
+	title VARCHAR, 
+	content TEXT, 
+	page_metadata JSON, 
+	embedding VECTOR(1536), 
+	created_at TIMESTAMP WITHOUT TIME ZONE, 
+	updated_at TIMESTAMP WITHOUT TIME ZONE, 
+	PRIMARY KEY (id)
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-04-19 17:36:05,200 - storage.db_handler - INFO - Database initialized successfully
+2025-04-19 18:02:18,274 - scraper.detector - INFO - Detecting content type for: https://www.ecellsmvit.in
+2025-04-19 18:02:18,618 - scraper.detector - INFO - Detected content type: text/html; charset=utf-8
+2025-04-19 18:02:18,622 - scraper.static_scraper - INFO - Scraping static content from: https://www.ecellsmvit.in
+2025-04-19 18:02:19,974 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-04-19 18:02:19,979 - extractor.ai_parser - ERROR - Error parsing with AI: Error code: 404 - {'error': {'message': 'The model `gpt-3.5` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-04-19 18:02:19,983 - storage.mcp_handler - INFO - Embedding content for URL: https://www.ecellsmvit.in
+2025-04-19 18:02:20,990 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-19 18:02:21,077 - storage.mcp_handler - INFO - Inserting new page for URL: https://www.ecellsmvit.in
+2025-04-19 18:02:21,147 - __main__ - ERROR - Error in scrape command: Instance <ScrapedPage at 0x7f4b3781b130> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
+Traceback (most recent call last):
+  File "/app/cli.py", line 68, in scrape
+    console.print(f" Stored page ID: {page.id}", style="bold green")
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 566, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 1086, in get
+    value = self._fire_loader_callables(state, key, passive)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 1116, in _fire_loader_callables
+    return state._load_expired(state, passive)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/state.py", line 803, in _load_expired
+    self.manager.expired_attribute_loader(self, toload, passive)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/loading.py", line 1603, in load_scalar_attributes
+    raise orm_exc.DetachedInstanceError(
+sqlalchemy.orm.exc.DetachedInstanceError: Instance <ScrapedPage at 0x7f4b3781b130> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
+2025-04-19 18:20:10,364 - scraper.detector - INFO - Detecting content type for: https://www.ecellsmvit.in
+2025-04-19 18:20:10,463 - scraper.detector - INFO - Detected content type: text/html; charset=utf-8
+2025-04-19 18:20:10,465 - scraper.static_scraper - INFO - Scraping static content from: https://www.ecellsmvit.in
+2025-04-19 18:20:11,221 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-04-19 18:20:11,225 - extractor.ai_parser - ERROR - Error parsing with AI: Error code: 404 - {'error': {'message': 'The model `gpt-3.5` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-04-19 18:20:11,235 - storage.mcp_handler - INFO - Embedding content for URL: https://www.ecellsmvit.in
+2025-04-19 18:20:12,213 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-19 18:20:12,300 - storage.mcp_handler - INFO - Updating existing page for URL: https://www.ecellsmvit.in
+2025-04-19 18:20:12,373 - __main__ - ERROR - Error in scrape command: Instance <ScrapedPage at 0x7f8154b6ac20> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
+Traceback (most recent call last):
+  File "/app/cli.py", line 68, in scrape
+    console.print(f" Stored page ID: {page.id}", style="bold green")
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 566, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 1086, in get
+    value = self._fire_loader_callables(state, key, passive)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 1116, in _fire_loader_callables
+    return state._load_expired(state, passive)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/state.py", line 803, in _load_expired
+    self.manager.expired_attribute_loader(self, toload, passive)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/loading.py", line 1603, in load_scalar_attributes
+    raise orm_exc.DetachedInstanceError(
+sqlalchemy.orm.exc.DetachedInstanceError: Instance <ScrapedPage at 0x7f8154b6ac20> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
+2025-04-19 18:31:15,077 - storage.db_handler - INFO - Database initialized successfully
+2025-04-19 18:32:33,033 - scraper.detector - INFO - Detecting content type for: https://www.ecellsmvit.in
+2025-04-19 18:32:33,477 - scraper.detector - INFO - Detected content type: text/html; charset=utf-8
+2025-04-19 18:32:33,481 - scraper.static_scraper - INFO - Scraping static content from: https://www.ecellsmvit.in
+2025-04-19 18:32:34,617 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-04-19 18:32:34,620 - extractor.ai_parser - ERROR - Error parsing with AI: Error code: 404 - {'error': {'message': 'The model `gpt-3.5` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-04-19 18:32:34,622 - storage.mcp_handler - INFO - Embedding content for URL: https://www.ecellsmvit.in
+2025-04-19 18:32:35,444 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-19 18:32:35,524 - storage.mcp_handler - INFO - Updating existing page for URL: https://www.ecellsmvit.in
+2025-04-19 18:32:35,589 - __main__ - ERROR - Error in scrape command: Instance <ScrapedPage at 0x7f59b9b667a0> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
+Traceback (most recent call last):
+  File "/app/cli.py", line 68, in scrape
+    console.print(f" Stored page ID: {page.id}", style="bold green")
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 566, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 1086, in get
+    value = self._fire_loader_callables(state, key, passive)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 1116, in _fire_loader_callables
+    return state._load_expired(state, passive)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/state.py", line 803, in _load_expired
+    self.manager.expired_attribute_loader(self, toload, passive)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/loading.py", line 1603, in load_scalar_attributes
+    raise orm_exc.DetachedInstanceError(
+sqlalchemy.orm.exc.DetachedInstanceError: Instance <ScrapedPage at 0x7f59b9b667a0> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
+2025-04-19 18:39:34,256 - scraper.detector - INFO - Detecting content type for: https://www.ecellsmvit.in
+2025-04-19 18:39:34,360 - scraper.detector - INFO - Detected content type: text/html; charset=utf-8
+2025-04-19 18:39:34,364 - scraper.static_scraper - INFO - Scraping static content from: https://www.ecellsmvit.in
+2025-04-19 18:39:35,590 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-04-19 18:39:35,593 - extractor.ai_parser - ERROR - Error parsing with AI: Error code: 404 - {'error': {'message': 'The model `gpt-3.5` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-04-19 18:39:35,598 - storage.mcp_handler - INFO - Embedding content for URL: https://www.ecellsmvit.in
+2025-04-19 18:39:36,820 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-19 18:39:36,958 - storage.mcp_handler - INFO - Updating existing page for URL: https://www.ecellsmvit.in
+2025-04-19 18:39:37,028 - __main__ - ERROR - Error in scrape command: Instance <ScrapedPage at 0x7f300abebcd0> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
+Traceback (most recent call last):
+  File "/app/cli.py", line 68, in scrape
+    console.print(f" Stored page ID: {page.id}", style="bold green")
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 566, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 1086, in get
+    value = self._fire_loader_callables(state, key, passive)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/attributes.py", line 1116, in _fire_loader_callables
+    return state._load_expired(state, passive)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/state.py", line 803, in _load_expired
+    self.manager.expired_attribute_loader(self, toload, passive)
+  File "/usr/local/lib/python3.10/site-packages/sqlalchemy/orm/loading.py", line 1603, in load_scalar_attributes
+    raise orm_exc.DetachedInstanceError(
+sqlalchemy.orm.exc.DetachedInstanceError: Instance <ScrapedPage at 0x7f300abebcd0> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
+2025-04-20 08:51:13,722 - scraper.detector - INFO - Detecting content type for: https://www.ecellsmvit.in
+2025-04-20 08:51:14,031 - scraper.detector - INFO - Detected content type: text/html; charset=utf-8
+2025-04-20 08:51:14,032 - scraper.static_scraper - INFO - Scraping static content from: https://www.ecellsmvit.in
+2025-04-20 08:51:15,251 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-04-20 08:51:15,253 - extractor.ai_parser - ERROR - Error parsing with AI: Error code: 404 - {'error': {'message': 'The model `gpt-3.5` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-04-20 08:51:15,256 - __main__ - ERROR - Error in scrape command: process_and_store() got an unexpected keyword argument 'metadata'
+Traceback (most recent call last):
+  File "/app/cli.py", line 59, in scrape
+    page = process_and_store(
+TypeError: process_and_store() got an unexpected keyword argument 'metadata'
+2025-04-20 09:14:28,730 - scraper.detector - INFO - Detecting content type for: https://www.ecellsmvit.in
+2025-04-20 09:14:28,997 - scraper.detector - INFO - Detected content type: text/html; charset=utf-8
+2025-04-20 09:14:28,999 - scraper.static_scraper - INFO - Scraping static content from: https://www.ecellsmvit.in
+2025-04-20 09:14:30,197 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 404 Not Found"
+2025-04-20 09:14:30,200 - extractor.ai_parser - ERROR - Error parsing with AI: Error code: 404 - {'error': {'message': 'The model `gpt-3.5` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+2025-04-20 09:14:30,202 - storage.mcp_handler - INFO - Embedding content for URL: https://www.ecellsmvit.in
+2025-04-20 09:14:30,838 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-20 09:14:30,905 - storage.mcp_handler - INFO - Updating existing page for URL: https://www.ecellsmvit.in
+2025-04-20 09:16:47,191 - scraper.detector - INFO - Detecting content type for: https://www.ecellsmvit.in
+2025-04-20 09:16:47,278 - scraper.detector - INFO - Detected content type: text/html; charset=utf-8
+2025-04-20 09:16:47,279 - scraper.static_scraper - INFO - Scraping static content from: https://www.ecellsmvit.in
+2025-04-20 09:16:48,314 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-04-20 09:16:48,317 - extractor.ai_parser - ERROR - Error parsing with AI: Error code: 400 - {'error': {'message': "Invalid parameter: 'response_format' of type 'json_object' is not supported with this model.", 'type': 'invalid_request_error', 'param': 'response_format', 'code': None}}
+2025-04-20 09:16:48,318 - storage.mcp_handler - INFO - Embedding content for URL: https://www.ecellsmvit.in
+2025-04-20 09:16:49,629 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-20 09:16:49,669 - storage.mcp_handler - INFO - Updating existing page for URL: https://www.ecellsmvit.in
+2025-04-20 09:22:04,695 - scraper.detector - INFO - Detecting content type for: https://www.ecellsmvit.in
+2025-04-20 09:22:04,801 - scraper.detector - INFO - Detected content type: text/html; charset=utf-8
+2025-04-20 09:22:04,802 - scraper.static_scraper - INFO - Scraping static content from: https://www.ecellsmvit.in
+2025-04-20 09:22:23,508 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-20 09:22:23,513 - extractor.ai_parser - INFO - Successfully parsed content with AI: extracted 5 fields
+2025-04-20 09:22:23,515 - storage.mcp_handler - INFO - Embedding content for URL: https://www.ecellsmvit.in
+2025-04-20 09:22:24,295 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-20 09:22:24,337 - storage.mcp_handler - INFO - Updating existing page for URL: https://www.ecellsmvit.in

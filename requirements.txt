@@ -1,0 +1,17 @@
+python-dotenv
+typer[all]
+requests
+beautifulsoup4
+playwright
+openai
+pandas
+langchain
+chromadb
+faiss-cpu
+pdfplumber
+pytesseract
+SQLAlchemy
+asyncio
+psycopg2-binary
+pgvector
+tiktoken
